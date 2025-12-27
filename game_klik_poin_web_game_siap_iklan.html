@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Klik Poin</title>
+
+  <!-- ====== GOOGLE ADSENSE (GANTI DENGAN PUNYA ANDA) ====== -->
+  <!--
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX"
+    crossorigin="anonymous"></script>
+  -->
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .game-box {
+      background: #020617;
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #38bdf8;
+    }
+
+    .score {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    .timer {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #a5f3fc;
+    }
+
+    .click-btn {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: none;
+      font-size: 24px;
+      font-weight: bold;
+      background: radial-gradient(circle at top, #22d3ee, #0284c7);
+      color: #020617;
+      cursor: pointer;
+      margin: 20px 0;
+      transition: transform 0.1s;
+    }
+
+    .click-btn:active {
+      transform: scale(0.92);
+    }
+
+    .start-btn {
+      padding: 12px 20px;
+      background: #22c55e;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .ads {
+      margin-top: 15px;
+      background: #020617;
+      border: 1px dashed #334155;
+      padding: 10px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-box">
+    <h1>🎯 Game Klik Poin</h1>
+
+    <div class="score">Skor: <span id="score">0</span></div>
+    <div class="timer">Waktu: <span id="time">10</span> detik</div>
+
+    <button id="clickBtn" class="click-btn hidden">KLIK!</button>
+    <br />
+    <button id="startBtn" class="start-btn">Mulai Game</button>
+
+    <!-- ====== AREA IKLAN ====== -->
+    <div class="ads">
+      Area Iklan (AdSense Banner)
+      <!--
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-XXXX"
+        data-ad-slot="1234567890"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    let timeLeft = 10;
+    let timer;
+
+    const scoreEl = document.getElementById('score');
+    const timeEl = document.getElementById('time');
+    const clickBtn = document.getElementById('clickBtn');
+    const startBtn = document.getElementById('startBtn');
+
+    startBtn.addEventListener('click', startGame);
+    clickBtn.addEventListener('click', addScore);
+
+    function startGame() {
+      score = 0;
+      timeLeft = 10;
+      scoreEl.textContent = score;
+      timeEl.textContent = timeLeft;
+
+      startBtn.classList.add('hidden');
+      clickBtn.classList.remove('hidden');
+
+      timer = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function addScore() {
+      score++;
+      scoreEl.textContent = score;
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      clickBtn.classList.add('hidden');
+      startBtn.classList.remove('hidden');
+      alert('Game Over! Skor kamu: ' + score);
+
+      // IDE IKLAN:
+      // - Tampilkan iklan interstitial di sini (untuk APK AdMob)
+      // - Atau trigger banner refresh
+    }
+  </script>
+
+</body>
+</html>
